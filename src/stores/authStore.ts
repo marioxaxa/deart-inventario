@@ -10,10 +10,16 @@ interface AuthUser {
   exp: number
 }
 
+interface WeakUser {
+  id: number
+  role: string
+  username: string
+}
+
 interface AuthState {
   auth: {
-    user: AuthUser | null
-    setUser: (user: AuthUser | null) => void
+    user: WeakUser | null
+    setUser: (user: WeakUser | null) => void
     accessToken: string
     setAccessToken: (accessToken: string) => void
     resetAccessToken: () => void

@@ -10,10 +10,19 @@ import { UsersTable } from './components/users-table'
 import UsersProvider from './context/users-context'
 import { userListSchema } from './data/schema'
 import { users } from './data/users'
+import { useAuthStore } from '@/stores/authStore'
+import { useNavigate } from '@tanstack/react-router'
 
 export default function Users() {
   // Parse user list
   const userList = userListSchema.parse(users)
+
+  const { auth } = useAuthStore()
+  
+    const navigate = useNavigate()
+    if(!auth.user) {
+      navigate({ to: '/sign-in' })
+    }
 
   return (
     <UsersProvider>

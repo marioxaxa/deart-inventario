@@ -43,8 +43,14 @@ const AuthenticatedTasksIndexLazyImport = createFileRoute(
 const AuthenticatedSettingsIndexLazyImport = createFileRoute(
   '/_authenticated/settings/',
 )()
+const AuthenticatedMovimentacoesIndexLazyImport = createFileRoute(
+  '/_authenticated/movimentacoes/',
+)()
 const AuthenticatedHelpCenterIndexLazyImport = createFileRoute(
   '/_authenticated/help-center/',
+)()
+const AuthenticatedEquipamentosIndexLazyImport = createFileRoute(
+  '/_authenticated/equipamentos/',
 )()
 const AuthenticatedChatsIndexLazyImport = createFileRoute(
   '/_authenticated/chats/',
@@ -198,6 +204,17 @@ const AuthenticatedSettingsIndexLazyRoute =
     import('./routes/_authenticated/settings/index.lazy').then((d) => d.Route),
   )
 
+const AuthenticatedMovimentacoesIndexLazyRoute =
+  AuthenticatedMovimentacoesIndexLazyImport.update({
+    id: '/movimentacoes/',
+    path: '/movimentacoes/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any).lazy(() =>
+    import('./routes/_authenticated/movimentacoes/index.lazy').then(
+      (d) => d.Route,
+    ),
+  )
+
 const AuthenticatedHelpCenterIndexLazyRoute =
   AuthenticatedHelpCenterIndexLazyImport.update({
     id: '/help-center/',
@@ -205,6 +222,17 @@ const AuthenticatedHelpCenterIndexLazyRoute =
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any).lazy(() =>
     import('./routes/_authenticated/help-center/index.lazy').then(
+      (d) => d.Route,
+    ),
+  )
+
+const AuthenticatedEquipamentosIndexLazyRoute =
+  AuthenticatedEquipamentosIndexLazyImport.update({
+    id: '/equipamentos/',
+    path: '/equipamentos/',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any).lazy(() =>
+    import('./routes/_authenticated/equipamentos/index.lazy').then(
       (d) => d.Route,
     ),
   )
@@ -416,11 +444,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedChatsIndexLazyImport
       parentRoute: typeof AuthenticatedRouteImport
     }
+    '/_authenticated/equipamentos/': {
+      id: '/_authenticated/equipamentos/'
+      path: '/equipamentos'
+      fullPath: '/equipamentos'
+      preLoaderRoute: typeof AuthenticatedEquipamentosIndexLazyImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
     '/_authenticated/help-center/': {
       id: '/_authenticated/help-center/'
       path: '/help-center'
       fullPath: '/help-center'
       preLoaderRoute: typeof AuthenticatedHelpCenterIndexLazyImport
+      parentRoute: typeof AuthenticatedRouteImport
+    }
+    '/_authenticated/movimentacoes/': {
+      id: '/_authenticated/movimentacoes/'
+      path: '/movimentacoes'
+      fullPath: '/movimentacoes'
+      preLoaderRoute: typeof AuthenticatedMovimentacoesIndexLazyImport
       parentRoute: typeof AuthenticatedRouteImport
     }
     '/_authenticated/settings/': {
@@ -480,7 +522,9 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
   AuthenticatedAppsIndexLazyRoute: typeof AuthenticatedAppsIndexLazyRoute
   AuthenticatedChatsIndexLazyRoute: typeof AuthenticatedChatsIndexLazyRoute
+  AuthenticatedEquipamentosIndexLazyRoute: typeof AuthenticatedEquipamentosIndexLazyRoute
   AuthenticatedHelpCenterIndexLazyRoute: typeof AuthenticatedHelpCenterIndexLazyRoute
+  AuthenticatedMovimentacoesIndexLazyRoute: typeof AuthenticatedMovimentacoesIndexLazyRoute
   AuthenticatedTasksIndexLazyRoute: typeof AuthenticatedTasksIndexLazyRoute
   AuthenticatedUsersIndexLazyRoute: typeof AuthenticatedUsersIndexLazyRoute
 }
@@ -491,7 +535,11 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedIndexRoute: AuthenticatedIndexRoute,
   AuthenticatedAppsIndexLazyRoute: AuthenticatedAppsIndexLazyRoute,
   AuthenticatedChatsIndexLazyRoute: AuthenticatedChatsIndexLazyRoute,
+  AuthenticatedEquipamentosIndexLazyRoute:
+    AuthenticatedEquipamentosIndexLazyRoute,
   AuthenticatedHelpCenterIndexLazyRoute: AuthenticatedHelpCenterIndexLazyRoute,
+  AuthenticatedMovimentacoesIndexLazyRoute:
+    AuthenticatedMovimentacoesIndexLazyRoute,
   AuthenticatedTasksIndexLazyRoute: AuthenticatedTasksIndexLazyRoute,
   AuthenticatedUsersIndexLazyRoute: AuthenticatedUsersIndexLazyRoute,
 }
@@ -519,7 +567,9 @@ export interface FileRoutesByFullPath {
   '/settings/notifications': typeof AuthenticatedSettingsNotificationsLazyRoute
   '/apps': typeof AuthenticatedAppsIndexLazyRoute
   '/chats': typeof AuthenticatedChatsIndexLazyRoute
+  '/equipamentos': typeof AuthenticatedEquipamentosIndexLazyRoute
   '/help-center': typeof AuthenticatedHelpCenterIndexLazyRoute
+  '/movimentacoes': typeof AuthenticatedMovimentacoesIndexLazyRoute
   '/settings/': typeof AuthenticatedSettingsIndexLazyRoute
   '/tasks': typeof AuthenticatedTasksIndexLazyRoute
   '/users': typeof AuthenticatedUsersIndexLazyRoute
@@ -543,7 +593,9 @@ export interface FileRoutesByTo {
   '/settings/notifications': typeof AuthenticatedSettingsNotificationsLazyRoute
   '/apps': typeof AuthenticatedAppsIndexLazyRoute
   '/chats': typeof AuthenticatedChatsIndexLazyRoute
+  '/equipamentos': typeof AuthenticatedEquipamentosIndexLazyRoute
   '/help-center': typeof AuthenticatedHelpCenterIndexLazyRoute
+  '/movimentacoes': typeof AuthenticatedMovimentacoesIndexLazyRoute
   '/settings': typeof AuthenticatedSettingsIndexLazyRoute
   '/tasks': typeof AuthenticatedTasksIndexLazyRoute
   '/users': typeof AuthenticatedUsersIndexLazyRoute
@@ -571,7 +623,9 @@ export interface FileRoutesById {
   '/_authenticated/settings/notifications': typeof AuthenticatedSettingsNotificationsLazyRoute
   '/_authenticated/apps/': typeof AuthenticatedAppsIndexLazyRoute
   '/_authenticated/chats/': typeof AuthenticatedChatsIndexLazyRoute
+  '/_authenticated/equipamentos/': typeof AuthenticatedEquipamentosIndexLazyRoute
   '/_authenticated/help-center/': typeof AuthenticatedHelpCenterIndexLazyRoute
+  '/_authenticated/movimentacoes/': typeof AuthenticatedMovimentacoesIndexLazyRoute
   '/_authenticated/settings/': typeof AuthenticatedSettingsIndexLazyRoute
   '/_authenticated/tasks/': typeof AuthenticatedTasksIndexLazyRoute
   '/_authenticated/users/': typeof AuthenticatedUsersIndexLazyRoute
@@ -599,7 +653,9 @@ export interface FileRouteTypes {
     | '/settings/notifications'
     | '/apps'
     | '/chats'
+    | '/equipamentos'
     | '/help-center'
+    | '/movimentacoes'
     | '/settings/'
     | '/tasks'
     | '/users'
@@ -622,7 +678,9 @@ export interface FileRouteTypes {
     | '/settings/notifications'
     | '/apps'
     | '/chats'
+    | '/equipamentos'
     | '/help-center'
+    | '/movimentacoes'
     | '/settings'
     | '/tasks'
     | '/users'
@@ -648,7 +706,9 @@ export interface FileRouteTypes {
     | '/_authenticated/settings/notifications'
     | '/_authenticated/apps/'
     | '/_authenticated/chats/'
+    | '/_authenticated/equipamentos/'
     | '/_authenticated/help-center/'
+    | '/_authenticated/movimentacoes/'
     | '/_authenticated/settings/'
     | '/_authenticated/tasks/'
     | '/_authenticated/users/'
@@ -716,7 +776,9 @@ export const routeTree = rootRoute
         "/_authenticated/",
         "/_authenticated/apps/",
         "/_authenticated/chats/",
+        "/_authenticated/equipamentos/",
         "/_authenticated/help-center/",
+        "/_authenticated/movimentacoes/",
         "/_authenticated/tasks/",
         "/_authenticated/users/"
       ]
@@ -793,8 +855,16 @@ export const routeTree = rootRoute
       "filePath": "_authenticated/chats/index.lazy.tsx",
       "parent": "/_authenticated"
     },
+    "/_authenticated/equipamentos/": {
+      "filePath": "_authenticated/equipamentos/index.lazy.tsx",
+      "parent": "/_authenticated"
+    },
     "/_authenticated/help-center/": {
       "filePath": "_authenticated/help-center/index.lazy.tsx",
+      "parent": "/_authenticated"
+    },
+    "/_authenticated/movimentacoes/": {
+      "filePath": "_authenticated/movimentacoes/index.lazy.tsx",
       "parent": "/_authenticated"
     },
     "/_authenticated/settings/": {
