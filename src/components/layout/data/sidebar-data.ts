@@ -33,11 +33,12 @@ export const sidebarData: SidebarData = {
           url: '/apps',
           icon: IconHomeMove,
         },
+        /** 
         {
           title: 'Usuarios',
           url: '/users',
           icon: IconUsers,
-        },
+        },*/
       ],
     },
   ],
